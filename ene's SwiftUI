@@ -1,0 +1,53 @@
+import SwiftUI
+
+struct ContentView: View {
+    @State private var isAnswerShown = false
+    @State private var currentElement = "Element Name" // Replace with your data source
+    @State private var currentAnswer = "Answer"        // Replace with your data source
+    @State private var currentImage: String? = nil     // Replace with your image name
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Spacer()
+
+            // Element Image
+            if let imageName = currentImage {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 140, height: 140)
+            } else {
+                Rectangle()
+                    .fill(Color.secondary.opacity(0.2))
+                    .frame(width: 140, height: 140)
+            }
+
+            Spacer()
+
+            // Answer Label
+            Text(isAnswerShown ? currentAnswer : "")
+                .font(.system(size: 24, weight: .bold))
+                .multilineTextAlignment(.center)
+                .frame(height: 30)
+
+            // Buttons
+            HStack(spacing: 40) {
+                Button("Show Answer") {
+                    isAnswerShown = true
+                }
+
+                Button("Next Element") {
+                    isAnswerShown = false
+                    // Add your next element logic here
+                }
+            }
+
+            Spacer()
+        }
+        .padding()
+    }
+}
+
+#Preview {
+    ContentView()
+}
